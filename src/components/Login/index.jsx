@@ -3,7 +3,9 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styles from './styles.module.css';
 
-const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
+console.log('Backend URL:');
+console.log('Backend URL:', process.env.REACT_APP_BACKEND_URL);
 
 const Login = () => {
   const [data, setData] = useState({ email: '', password: '' });

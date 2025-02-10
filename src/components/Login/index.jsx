@@ -1,11 +1,13 @@
-import { useState } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import styles from "./styles.module.css";
+import { useState } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import styles from './styles.module.css';
+
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Login = () => {
-  const [data, setData] = useState({ email: "", password: "" });
-  const [error, setError] = useState("");
+  const [data, setData] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
@@ -14,11 +16,12 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:8080/api/auth/login";
+      // const url = "http://localhost:8080/api/auth/login";
+      const url = `${API_BASE_URL}/api/auth/login`; // deployed backend
 
       const { data: res } = await axios.post(url, data);
-      localStorage.setItem("token", res.data);
-      window.location = "/";
+      localStorage.setItem('token', res.data);
+      window.location = '/';
     } catch (error) {
       if (
         error.response &&

@@ -1,16 +1,17 @@
-import { useState } from "react";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-import styles from "./styles.module.css";
+import { useState } from 'react';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import styles from './styles.module.css';
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Signup = () => {
   const [data, setData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
   });
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleChange = ({ currentTarget: input }) => {
@@ -20,9 +21,10 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:8080/api/users";
+      // const url = "http://localhost:8080/api/users";
+      const url = `${API_BASE_URL}/api/users`; // deployed backend
       const { data: res } = await axios.post(url, data);
-      navigate("/login");
+      navigate('/login');
       console.log(res.message);
     } catch (error) {
       if (
